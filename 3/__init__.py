@@ -14,7 +14,7 @@ def abrirArquivoJson(arquivo):
     with open(arquivo, 'r') as f:
         dados = json.load(f)
     print("Arquivo carregado")
-    return dados['faturamento_diario']
+    return [item['valor'] for item in dados]
 
 def minList(lista):
     x = 2**63 - 1
@@ -23,14 +23,14 @@ def minList(lista):
             x = n
     if x == 2**63 - 1:
         return (0)
-    return (x)
+    return (x)  #Poderia ser apenas um return min(lista), mas optei por fazer assim
 
 def maxList(lista):
     x = 0
     for n in lista:
         if (n > x):
             x = n
-    return (x)
+    return (x) #Poderia ser apenas um return max(lista), mas optei por fazer assim
 
 def medList(lista):
     swap = 0
@@ -38,15 +38,14 @@ def medList(lista):
     for n in lista:
         swap += n
         cont += 1
-    return (swap/cont)
+    return (swap/cont)  # Poderia ser return sum(lista) /len(lista), mas optei por fazer assim
 
 def diaMaiorMedia(lista, media):
     day = 0
     for n in lista:
         day += 1
         if n > media:
-            print("Dia", day, "faturamento de ", n, ", foi maior que a média:", media)
-
+            print(f"Dia {day}, faturamento de {n:.2f}, foi maior que a média: {media:.2f}")
 
 fat_day = abrirArquivoJson('faturamento.json')
 print(minList(fat_day))
